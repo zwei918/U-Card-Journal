@@ -2,7 +2,7 @@ import { defineAstroPaperConfig } from "./src/types/config";
 
 export default defineAstroPaperConfig({
   site: {
-    url: "https://example.pages.dev/",
+    url: "https://u-card-journal.pages.dev/",
     title: "U Card Journal",
     description: "U 卡、虚拟信用卡、交易所、钱包与跨境支付资讯。",
     author: "U Card Journal",

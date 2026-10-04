@@ -1,0 +1,85 @@
+---
+import IconMenuDeep from "@/assets/icons/IconMenuDeep.svg";
+import IconX from "@/assets/icons/IconX.svg";
+import IconSearch from "@/assets/icons/IconSearch.svg";
+import IconMoon from "@/assets/icons/IconMoon.svg";
+import IconSunHigh from "@/assets/icons/IconSunHigh.svg";
+import config from "@/config";
+
+const nav = [
+  { href: "/cards", label: "U 卡" },
+  { href: "/compare", label: "对比" },
+  { href: "/posts", label: "资讯" },
+  { href: "/tags", label: "专题" },
+];
+
+const currentPath = Astro.url.pathname;
+const active = (href: string) => currentPath === href || currentPath.startsWith(href + "/");
+---
+
+<header class="app-layout">
+  <div class="border-border flex min-h-16 items-center justify-between border-b py-4">
+    <a href="/" class="text-xl font-semibold tracking-tight sm:text-2xl">
+      {config.site.title}
+    </a>
+
+    <nav class="flex items-center gap-1">
+      <ul id="menu-items" class="hidden items-center gap-1 sm:flex">
+        {nav.map(item => (
+          <li>
+            <a
+              href={item.href}
+              class:list={[
+                "hover:text-accent px-3 py-2 text-sm font-medium",
+                active(item.href) && "text-accent",
+              ]}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <a href="/search" aria-label="搜索" class="relative size-9">
+        <IconSearch class="absolute top-1/2 left-1/2 size-5 -translate-x-1/2 -translate-y-1/2" />
+      </a>
+
+      <button id="theme-btn" class="relative size-9" aria-label="切换主题">
+        <IconMoon class="absolute top-1/2 left-1/2 size-5 -translate-x-1/2 -translate-y-1/2 scale-100 dark:scale-0" />
+        <IconSunHigh class="absolute top-1/2 left-1/2 size-5 -translate-x-1/2 -translate-y-1/2 scale-0 dark:scale-100" />
+      </button>
+
+      <button id="menu-btn" class="relative size-9 sm:hidden" aria-label="打开菜单" aria-expanded="false">
+        <IconMenuDeep id="menu-icon" class="absolute top-1/2 left-1/2 size-5 -translate-x-1/2 -translate-y-1/2" />
+        <IconX id="close-icon" class="absolute top-1/2 left-1/2 hidden size-5 -translate-x-1/2 -translate-y-1/2" />
+      </button>
+    </nav>
+  </div>
+
+  <div id="mobile-menu" class="border-border hidden border-b py-3 sm:hidden">
+    <div class="flex flex-col">
+      {nav.map(item => (
+        <a href={item.href} class="hover:text-accent py-2 text-sm font-medium">{item.label}</a>
+      ))}
+    </div>
+  </div>
+</header>
+
+<script>
+  const setupMenu = () => {
+    const btn = document.querySelector<HTMLButtonElement>("#menu-btn");
+    const menu = document.querySelector<HTMLElement>("#mobile-menu");
+    const menuIcon = document.querySelector<HTMLElement>("#menu-icon");
+    const closeIcon = document.querySelector<HTMLElement>("#close-icon");
+    if (!btn || !menu || !menuIcon || !closeIcon) return;
+    btn.onclick = () => {
+      const open = btn.getAttribute("aria-expanded") === "true";
+      btn.setAttribute("aria-expanded", String(!open));
+      menu.classList.toggle("hidden");
+      menuIcon.classList.toggle("hidden");
+      closeIcon.classList.toggle("hidden");
+    };
+  };
+  setupMenu();
+  document.addEventListener("astro:after-swap", setupMenu);
+</script>

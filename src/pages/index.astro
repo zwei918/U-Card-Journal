@@ -1,0 +1,144 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+
+const latest = [
+  { title: "某 U 卡调整充值费率，部分地区规则同步变化", meta: "费率 · 2 小时前" },
+  { title: "Apple Pay 支持范围更新：这些卡片目前可绑定", meta: "支付 · 今天" },
+  { title: "KYC 政策趋严后，如何判断一张 U 卡是否值得长期使用", meta: "合规 · 昨天" },
+];
+
+const cards = [
+  { name: "Bybit Card", score: "4.6", note: "适合日常消费与 Apple Pay 用户" },
+  { name: "OKX Card", score: "4.4", note: "适合多地区与加密资产用户" },
+  { name: "RedotPay", score: "4.3", note: "适合 USDT 支付与虚拟卡用户" },
+];
+
+const ecosystem = [
+  { type: "交易所", name: "OKX", note: "现货、法币与 Web3 生态较完整" },
+  { type: "钱包", name: "OKX Wallet", note: "多链、DApp 与 Swap 体验完整" },
+  { type: "钱包", name: "Rabby", note: "更偏重安全提示与多链交互" },
+];
+---
+
+<Layout>
+  <Header />
+  <main id="main-content" class="app-layout pb-12">
+    <section class="border-border border-b py-10 sm:py-16">
+      <div class="max-w-2xl">
+        <p class="text-accent mb-3 text-sm font-medium">U 卡 · 虚拟卡 · 跨境支付资讯</p>
+        <h1 class="text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
+          了解、比较、选择适合你的 U 卡
+        </h1>
+        <p class="text-foreground/70 mt-5 max-w-xl text-base leading-7 sm:text-lg">
+          独立整理 U 卡评测、费率变化、KYC、地区支持、Apple Pay、Google Pay、USDT 充值与风险信息。
+        </p>
+
+        <form action="/search" class="mt-7">
+          <label for="home-search" class="sr-only">搜索 U 卡、费率或资讯</label>
+          <div class="border-border flex items-center border-b py-3">
+            <input
+              id="home-search"
+              name="q"
+              type="search"
+              placeholder="搜索 U 卡、费率、KYC、Apple Pay…"
+              class="w-full bg-transparent text-base outline-none placeholder:text-foreground/40"
+            />
+            <button class="text-accent ms-4 text-sm font-medium" type="submit">搜索</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="border-border border-b py-10 sm:py-14">
+      <div class="mb-6 flex items-end justify-between gap-4">
+        <div>
+          <p class="text-foreground/45 mb-1 text-xs tracking-[0.18em] uppercase">Featured</p>
+          <h2 class="text-2xl font-semibold">精选文章</h2>
+        </div>
+        <a href="/posts" class="text-accent text-sm">查看更多 →</a>
+      </div>
+
+      <article class="max-w-2xl">
+        <p class="text-foreground/50 text-sm">编辑推荐 · U 卡观察</p>
+        <h3 class="mt-2 text-2xl font-semibold leading-snug">
+          <a href="/posts">2026 年选择 U 卡，真正需要关注的不是“免 KYC”三个字</a>
+        </h3>
+        <p class="text-foreground/65 mt-3 leading-7">
+          从发卡机构、地区、费用透明度、资金路径与停卡风险几个维度，建立一套更长期的判断方法。
+        </p>
+      </article>
+    </section>
+
+    <section class="border-border border-b py-10 sm:py-14">
+      <div class="mb-6 flex items-end justify-between">
+        <div>
+          <p class="text-foreground/45 mb-1 text-xs tracking-[0.18em] uppercase">Latest Updates</p>
+          <h2 class="text-2xl font-semibold">最新动态</h2>
+        </div>
+        <a href="/posts" class="text-accent text-sm">全部资讯 →</a>
+      </div>
+      <div class="divide-border divide-y">
+        {latest.map(item => (
+          <article class="py-5 first:pt-0">
+            <p class="text-foreground/45 mb-2 text-xs">{item.meta}</p>
+            <h3 class="text-lg font-medium leading-7">
+              <a href="/posts" class="hover:text-accent">{item.title}</a>
+            </h3>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-border border-b py-10 sm:py-14">
+      <div class="mb-6">
+        <p class="text-foreground/45 mb-1 text-xs tracking-[0.18em] uppercase">Recommended Cards</p>
+        <h2 class="text-2xl font-semibold">热门 U 卡</h2>
+        <p class="text-foreground/55 mt-2 text-sm">只展示少量值得进一步了解的卡片，完整参数进入 Cards 与 Compare。</p>
+      </div>
+
+      <div class="divide-border divide-y">
+        {cards.map((card, index) => (
+          <article class="grid grid-cols-[36px_1fr_auto] gap-3 py-5 first:pt-0">
+            <span class="text-foreground/35 text-sm">{String(index + 1).padStart(2, "0")}</span>
+            <div>
+              <h3 class="font-semibold">{card.name}</h3>
+              <p class="text-foreground/55 mt-1 text-sm">{card.note}</p>
+            </div>
+            <div class="text-right">
+              <div class="font-semibold">{card.score}</div>
+              <div class="text-foreground/40 text-xs">综合评分</div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="mt-3 flex gap-5 text-sm">
+        <a href="/cards" class="text-accent">查看全部 U 卡 →</a>
+        <a href="/compare" class="text-accent">卡片对比 →</a>
+      </div>
+    </section>
+
+    <section class="py-10 sm:py-14">
+      <div class="mb-6">
+        <p class="text-foreground/45 mb-1 text-xs tracking-[0.18em] uppercase">Ecosystem</p>
+        <h2 class="text-2xl font-semibold">交易所与钱包</h2>
+        <p class="text-foreground/55 mt-2 text-sm">作为 U 卡资金路径与支付生态的补充，只做精选，不做导航站式堆料。</p>
+      </div>
+
+      <div class="divide-border divide-y">
+        {ecosystem.map(item => (
+          <article class="grid grid-cols-[64px_1fr] gap-4 py-5 first:pt-0">
+            <span class="text-foreground/45 text-sm">{item.type}</span>
+            <div>
+              <h3 class="font-semibold">{item.name}</h3>
+              <p class="text-foreground/55 mt-1 text-sm">{item.note}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

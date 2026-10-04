@@ -1,0 +1,28 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+const cards = [
+  ["Bybit Card","4.6","日常消费 / Apple Pay"],
+  ["OKX Card","4.4","多地区 / 加密资产用户"],
+  ["RedotPay","4.3","USDT 支付 / 虚拟卡"],
+];
+---
+<Layout>
+  <Header />
+  <main id="main-content" class="app-layout py-10 sm:py-14">
+    <p class="text-foreground/45 mb-2 text-xs tracking-[0.18em] uppercase">Cards</p>
+    <h1 class="text-4xl font-bold tracking-tight">U 卡目录</h1>
+    <p class="text-foreground/60 mt-4 max-w-xl leading-7">先做少而精的卡片目录。地区、KYC、Apple Pay、Google Pay、USDT 与费用筛选将在数据量足够后逐步加入。</p>
+    <div class="border-border mt-8 border-b">
+      {cards.map(([name,score,note],i) => (
+        <article class="border-border grid grid-cols-[36px_1fr_auto] gap-3 border-t py-5">
+          <span class="text-foreground/35 text-sm">{String(i+1).padStart(2,"0")}</span>
+          <div><h2 class="font-semibold">{name}</h2><p class="text-foreground/55 mt-1 text-sm">{note}</p></div>
+          <div class="text-right"><div class="font-semibold">{score}</div><div class="text-foreground/40 text-xs">评分</div></div>
+        </article>
+      ))}
+    </div>
+  </main>
+  <Footer />
+</Layout>

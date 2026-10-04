@@ -21,46 +21,57 @@ const langHref = (target: "zh-CN" | "en" | "ja") => localizedPath(rawPath, targe
 ---
 
 <header class="app-layout">
-  <div class="border-border flex min-h-16 items-center justify-between border-b py-4">
-    <a href={localizedPath("/", locale)} class="text-xl font-semibold tracking-tight sm:text-2xl">
-      {config.site.title}
-    </a>
+  <div class="border-border flex min-h-20 items-center justify-between border-b py-4 sm:min-h-18 sm:py-5">
+    <div class="min-w-0">
+      <a href={localizedPath("/", locale)} class="editorial-serif block text-[1.55rem] leading-none font-semibold tracking-tight sm:text-2xl">
+        {config.site.title}
+      </a>
+      <p class="text-foreground/45 mt-2 max-w-[220px] truncate text-[11px] sm:hidden">{t.tagline}</p>
+    </div>
 
-    <nav class="flex items-center gap-1">
-      <ul id="menu-items" class="hidden items-center gap-1 sm:flex">
+    <nav class="flex shrink-0 items-center gap-1">
+      <ul class="hidden items-center gap-1 sm:flex">
         {nav.map(item => (
           <li>
-            <a href={localizedPath(item.href, locale)} class:list={["hover:text-accent px-3 py-2 text-sm font-medium", active(item.href) && "text-accent"]}>{item.label}</a>
+            <a
+              href={localizedPath(item.href, locale)}
+              class:list={[
+                "hover:text-accent px-3 py-2 text-sm font-medium",
+                active(item.href) && "text-accent",
+              ]}
+            >
+              {item.label}
+            </a>
           </li>
         ))}
       </ul>
 
       <div class="hidden items-center gap-1 sm:flex">
-        <a href={langHref("zh-CN")} class:list={["px-2 py-2 text-xs", locale === "zh-CN" ? "text-accent font-semibold" : "text-foreground/50"]}>中</a>
-        <a href={langHref("en")} class:list={["px-2 py-2 text-xs", locale === "en" ? "text-accent font-semibold" : "text-foreground/50"]}>EN</a>
-        <a href={langHref("ja")} class:list={["px-2 py-2 text-xs", locale === "ja" ? "text-accent font-semibold" : "text-foreground/50"]}>日</a>
+        <a href={langHref("zh-CN")} class:list={["px-2 py-2 text-xs", locale === "zh-CN" ? "text-accent font-semibold" : "text-foreground/45"]}>中</a>
+        <a href={langHref("en")} class:list={["px-2 py-2 text-xs", locale === "en" ? "text-accent font-semibold" : "text-foreground/45"]}>EN</a>
+        <a href={langHref("ja")} class:list={["px-2 py-2 text-xs", locale === "ja" ? "text-accent font-semibold" : "text-foreground/45"]}>日</a>
       </div>
 
-      <a href={localizedPath("/search", locale)} aria-label={t.search} class="relative size-9">
-        <IconSearch class="absolute top-1/2 left-1/2 size-5 -translate-x-1/2 -translate-y-1/2" />
+      <a href={localizedPath("/search", locale)} aria-label={t.search} class="relative size-10">
+        <IconSearch class="absolute top-1/2 left-1/2 size-[21px] -translate-x-1/2 -translate-y-1/2" />
       </a>
 
-      <button id="theme-btn" class="relative size-9" aria-label={t.theme}>
+      <button id="theme-btn" class="relative hidden size-9 sm:block" aria-label={t.theme}>
         <IconMoon class="absolute top-1/2 left-1/2 size-5 -translate-x-1/2 -translate-y-1/2 scale-100 dark:scale-0" />
         <IconSunHigh class="absolute top-1/2 left-1/2 size-5 -translate-x-1/2 -translate-y-1/2 scale-0 dark:scale-100" />
       </button>
 
-      <button id="menu-btn" class="relative size-9 sm:hidden" aria-label={t.menu} aria-expanded="false">
-        <IconMenuDeep id="menu-icon" class="absolute top-1/2 left-1/2 size-5 -translate-x-1/2 -translate-y-1/2" />
-        <IconX id="close-icon" class="absolute top-1/2 left-1/2 hidden size-5 -translate-x-1/2 -translate-y-1/2" />
+      <button id="menu-btn" class="relative size-10 sm:hidden" aria-label={t.menu} aria-expanded="false">
+        <IconMenuDeep id="menu-icon" class="absolute top-1/2 left-1/2 size-[22px] -translate-x-1/2 -translate-y-1/2" />
+        <IconX id="close-icon" class="absolute top-1/2 left-1/2 hidden size-[22px] -translate-x-1/2 -translate-y-1/2" />
       </button>
     </nav>
   </div>
 
-  <div id="mobile-menu" class="border-border hidden border-b py-3 sm:hidden">
+  <div id="mobile-menu" class="border-border hidden border-b py-4 sm:hidden">
     <div class="flex flex-col">
-      {nav.map(item => <a href={localizedPath(item.href, locale)} class="hover:text-accent py-2 text-sm font-medium">{item.label}</a>)}
-      <div class="border-border mt-2 flex gap-4 border-t pt-3">
+      {nav.map(item => <a href={localizedPath(item.href, locale)} class="hover:text-accent py-2.5 text-sm font-medium">{item.label}</a>)}
+      <div class="border-border mt-2 flex flex-wrap gap-x-5 gap-y-2 border-t pt-4">
         <a href={langHref("zh-CN")} class:list={["text-sm", locale === "zh-CN" ? "text-accent font-semibold" : "text-foreground/55"]}>简体中文</a>
         <a href={langHref("en")} class:list={["text-sm", locale === "en" ? "text-accent font-semibold" : "text-foreground/55"]}>English</a>
         <a href={langHref("ja")} class:list={["text-sm", locale === "ja" ? "text-accent font-semibold" : "text-foreground/55"]}>日本語</a>
@@ -76,6 +87,7 @@ const langHref = (target: "zh-CN" | "en" | "ja") => localizedPath(rawPath, targe
     const menuIcon = document.querySelector<HTMLElement>("#menu-icon");
     const closeIcon = document.querySelector<HTMLElement>("#close-icon");
     if (!btn || !menu || !menuIcon || !closeIcon) return;
+
     btn.onclick = () => {
       const open = btn.getAttribute("aria-expanded") === "true";
       btn.setAttribute("aria-expanded", String(!open));
@@ -84,6 +96,7 @@ const langHref = (target: "zh-CN" | "en" | "ja") => localizedPath(rawPath, targe
       closeIcon.classList.toggle("hidden");
     };
   };
+
   setupMenu();
   document.addEventListener("astro:after-swap", setupMenu);
 </script>

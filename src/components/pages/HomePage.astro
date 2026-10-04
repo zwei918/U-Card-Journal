@@ -7,19 +7,23 @@ import { getSiteCopy, normalizeLocale, localizedPath } from "@/i18n/site";
 const locale = normalizeLocale(Astro.currentLocale);
 const t = getSiteCopy(locale);
 
-const latest = locale === "en" ? [
-  { title: "A crypto card updates top-up fees and regional rules", meta: "Fees · 2 hours ago" },
-  { title: "Apple Pay support update: which cards currently work", meta: "Payments · Today" },
-  { title: "How to judge long-term card reliability as KYC gets stricter", meta: "Compliance · Yesterday" },
-] : locale === "ja" ? [
-  { title: "ある暗号資産カードが入金手数料と地域ルールを変更", meta: "手数料 · 2時間前" },
-  { title: "Apple Pay 対応状況を更新：現在利用できるカード", meta: "決済 · 今日" },
-  { title: "KYC 強化後に長期利用できるカードを見極める方法", meta: "コンプライアンス · 昨日" },
-] : [
-  { title: "某 U 卡调整充值费率，部分地区规则同步变化", meta: "费率 · 2 小时前" },
-  { title: "Apple Pay 支持范围更新：这些卡片目前可绑定", meta: "支付 · 今天" },
-  { title: "KYC 政策趋严后，如何判断一张 U 卡是否值得长期使用", meta: "合规 · 昨天" },
-];
+const latest = locale === "en"
+  ? [
+      { title: "A crypto card updates top-up fees and regional rules", meta: "Fees · 2 hours ago" },
+      { title: "Apple Pay support update: which cards currently work", meta: "Payments · Today" },
+      { title: "How to judge long-term card reliability as KYC gets stricter", meta: "Compliance · Yesterday" },
+    ]
+  : locale === "ja"
+    ? [
+        { title: "ある暗号資産カードが入金手数料と地域ルールを変更", meta: "手数料 · 2時間前" },
+        { title: "Apple Pay 対応状況を更新：現在利用できるカード", meta: "決済 · 今日" },
+        { title: "KYC 強化後に長期利用できるカードを見極める方法", meta: "コンプライアンス · 昨日" },
+      ]
+    : [
+        { title: "某 U 卡调整充值费率，部分地区规则同步变化", meta: "费率 · 2 小时前" },
+        { title: "Apple Pay 支持范围更新：这些卡片目前可绑定", meta: "支付 · 今天" },
+        { title: "KYC 政策趋严后，如何判断一张 U 卡是否值得长期使用", meta: "合规 · 昨天" },
+      ];
 
 const cards = [
   { name: "Bybit Card", score: "4.6", note: locale === "en" ? "Daily spending / Apple Pay" : locale === "ja" ? "日常決済 / Apple Pay" : "日常消费 / Apple Pay" },
@@ -32,61 +36,183 @@ const ecosystem = [
   { type: locale === "en" ? "Wallet" : locale === "ja" ? "ウォレット" : "钱包", name: "OKX Wallet", note: locale === "en" ? "Multi-chain, DApp, and swap tools" : locale === "ja" ? "マルチチェーン、DApp、Swap に対応" : "多链、DApp 与 Swap 体验完整" },
   { type: locale === "en" ? "Wallet" : locale === "ja" ? "ウォレット" : "钱包", name: "Rabby", note: locale === "en" ? "Strong transaction warnings and multi-chain UX" : locale === "ja" ? "安全警告とマルチチェーン操作に強い" : "更偏重安全提示与多链交互" },
 ];
+
+const scoreLabel = locale === "en" ? "Score" : locale === "ja" ? "評価" : "评分";
+const featuredMeta = locale === "en" ? "Editor's pick · 8 min read" : locale === "ja" ? "編集部おすすめ · 8分" : "编辑推荐 · 8 分钟阅读";
 ---
 
 <Layout>
   <Header />
+
   <main id="main-content" class="app-layout pb-12">
-    <section class="border-border border-b py-10 sm:py-16">
+    <section class="border-border border-b py-9 sm:py-16">
       <div class="max-w-2xl">
-        <p class="text-accent mb-3 text-sm font-medium">{t.home.eyebrow}</p>
-        <h1 class="text-4xl font-bold leading-tight tracking-tight sm:text-5xl">{t.home.title}</h1>
-        <p class="text-foreground/70 mt-5 max-w-xl text-base leading-7 sm:text-lg">{t.home.intro}</p>
+        <p class="text-accent mb-3 text-[13px] font-medium tracking-[0.02em]">{t.home.eyebrow}</p>
+
+        <h1 class="editorial-serif max-w-[680px] break-all text-[2.2rem] leading-[1.18] font-semibold tracking-[-0.04em] sm:text-5xl">
+          {t.home.title}
+        </h1>
+
+        <p class="text-foreground/62 mt-5 max-w-xl text-[15px] leading-7 sm:text-lg">
+          {t.home.intro}
+        </p>
+
         <form action={localizedPath("/search", locale)} class="mt-7">
           <label for="home-search" class="sr-only">{t.search}</label>
-          <div class="border-border flex items-center border-b py-3">
-            <input id="home-search" name="q" type="search" placeholder={t.home.searchPlaceholder} class="w-full bg-transparent text-base outline-none placeholder:text-foreground/40" />
-            <button class="text-accent ms-4 text-sm font-medium" type="submit">{t.search}</button>
+          <div class="border-border flex items-center border-b py-3.5">
+            <input
+              id="home-search"
+              name="q"
+              type="search"
+              placeholder={t.home.searchPlaceholder}
+              class="w-full bg-transparent text-[15px] outline-none placeholder:text-foreground/35"
+            />
+            <button class="text-accent ms-4 shrink-0 text-sm font-medium" type="submit">{t.search}</button>
           </div>
         </form>
       </div>
     </section>
 
     <section class="border-border border-b py-10 sm:py-14">
-      <p class="text-foreground/45 mb-1 text-xs tracking-[0.18em] uppercase">Featured</p>
-      <h2 class="text-2xl font-semibold">{t.home.featured}</h2>
-      <article class="mt-6 max-w-2xl">
-        <h3 class="text-2xl font-semibold leading-snug"><a href={localizedPath("/posts", locale)}>{t.home.featuredTitle}</a></h3>
-        <p class="text-foreground/65 mt-3 leading-7">{t.home.featuredDesc}</p>
+      <div class="mb-6 flex items-end justify-between gap-4">
+        <div>
+          <p class="text-foreground/38 mb-1 text-[10px] tracking-[0.22em] uppercase">Featured</p>
+          <h2 class="editorial-serif text-[1.7rem] leading-tight font-semibold">{t.home.featured}</h2>
+        </div>
+      </div>
+
+      <article class="featured-story overflow-hidden border border-black/8 bg-[#10151b] text-white dark:border-white/10">
+        <div class="featured-visual relative min-h-[250px] p-6 sm:min-h-[320px] sm:p-8">
+          <div class="relative z-10 flex min-h-[200px] max-w-[86%] flex-col justify-end sm:min-h-[260px]">
+            <p class="mb-3 text-xs text-white/55">{featuredMeta}</p>
+            <h3 class="editorial-serif break-all text-[1.62rem] leading-[1.3] font-semibold tracking-[-0.025em] sm:text-3xl">
+              <a href={localizedPath("/posts", locale)}>{t.home.featuredTitle}</a>
+            </h3>
+            <p class="mt-3 max-w-xl text-sm leading-6 text-white/65">{t.home.featuredDesc}</p>
+          </div>
+          <div class="card-shape card-shape-a" aria-hidden="true"></div>
+          <div class="card-shape card-shape-b" aria-hidden="true"></div>
+          <div class="glow" aria-hidden="true"></div>
+        </div>
       </article>
     </section>
 
     <section class="border-border border-b py-10 sm:py-14">
-      <div class="mb-6 flex items-end justify-between">
-        <div><p class="text-foreground/45 mb-1 text-xs tracking-[0.18em] uppercase">Latest Updates</p><h2 class="text-2xl font-semibold">{t.home.latest}</h2></div>
-        <a href={localizedPath("/posts", locale)} class="text-accent text-sm">{t.home.allNews}</a>
+      <div class="mb-6 flex items-end justify-between gap-4">
+        <div>
+          <p class="text-foreground/38 mb-1 text-[10px] tracking-[0.22em] uppercase">Latest Updates</p>
+          <h2 class="editorial-serif text-[1.7rem] leading-tight font-semibold">{t.home.latest}</h2>
+        </div>
+        <a href={localizedPath("/posts", locale)} class="text-accent shrink-0 text-sm">{t.home.allNews}</a>
       </div>
+
       <div class="divide-border divide-y">
-        {latest.map(item => <article class="py-5 first:pt-0"><p class="text-foreground/45 mb-2 text-xs">{item.meta}</p><h3 class="text-lg font-medium leading-7">{item.title}</h3></article>)}
+        {latest.map((item, index) => (
+          <article class="grid grid-cols-[28px_1fr] gap-3 py-5 first:pt-0">
+            <span class="text-foreground/28 pt-1 text-[11px]">{String(index + 1).padStart(2, "0")}</span>
+            <div>
+              <p class="text-foreground/40 mb-1.5 text-[11px]">{item.meta}</p>
+              <h3 class="text-[1.02rem] leading-7 font-medium">{item.title}</h3>
+            </div>
+          </article>
+        ))}
       </div>
     </section>
 
     <section class="border-border border-b py-10 sm:py-14">
-      <p class="text-foreground/45 mb-1 text-xs tracking-[0.18em] uppercase">Recommended Cards</p>
-      <h2 class="text-2xl font-semibold">{t.home.cards}</h2>
-      <div class="divide-border mt-6 divide-y">
-        {cards.map((card, index) => <article class="grid grid-cols-[36px_1fr_auto] gap-3 py-5 first:pt-0"><span class="text-foreground/35 text-sm">{String(index+1).padStart(2,"0")}</span><div><h3 class="font-semibold">{card.name}</h3><p class="text-foreground/55 mt-1 text-sm">{card.note}</p></div><div class="text-right"><div class="font-semibold">{card.score}</div><div class="text-foreground/40 text-xs">Score</div></div></article>)}
+      <div class="mb-6">
+        <p class="text-foreground/38 mb-1 text-[10px] tracking-[0.22em] uppercase">Recommended Cards</p>
+        <h2 class="editorial-serif text-[1.7rem] leading-tight font-semibold">{t.home.cards}</h2>
       </div>
-      <div class="mt-3 flex gap-5 text-sm"><a href={localizedPath("/cards", locale)} class="text-accent">{t.home.allCards}</a><a href={localizedPath("/compare", locale)} class="text-accent">{t.home.compare}</a></div>
+
+      <div class="divide-border divide-y">
+        {cards.map((card, index) => (
+          <article class="grid grid-cols-[30px_1fr_auto] items-start gap-3 py-5 first:pt-0">
+            <span class="text-foreground/28 pt-0.5 text-[11px]">{String(index + 1).padStart(2, "0")}</span>
+            <div>
+              <h3 class="font-semibold">{card.name}</h3>
+              <p class="text-foreground/48 mt-1 text-sm leading-6">{card.note}</p>
+            </div>
+            <div class="text-right">
+              <div class="text-[15px] font-semibold">{card.score}</div>
+              <div class="text-foreground/35 mt-0.5 text-[10px]">{scoreLabel}</div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+        <a href={localizedPath("/cards", locale)} class="text-accent">{t.home.allCards}</a>
+        <a href={localizedPath("/compare", locale)} class="text-accent">{t.home.compare}</a>
+      </div>
     </section>
 
     <section class="py-10 sm:py-14">
-      <p class="text-foreground/45 mb-1 text-xs tracking-[0.18em] uppercase">Ecosystem</p>
-      <h2 class="text-2xl font-semibold">{t.home.ecosystem}</h2>
-      <div class="divide-border mt-6 divide-y">
-        {ecosystem.map(item => <article class="grid grid-cols-[72px_1fr] gap-4 py-5 first:pt-0"><span class="text-foreground/45 text-sm">{item.type}</span><div><h3 class="font-semibold">{item.name}</h3><p class="text-foreground/55 mt-1 text-sm">{item.note}</p></div></article>)}
+      <div class="mb-6">
+        <p class="text-foreground/38 mb-1 text-[10px] tracking-[0.22em] uppercase">Ecosystem</p>
+        <h2 class="editorial-serif text-[1.7rem] leading-tight font-semibold">{t.home.ecosystem}</h2>
+      </div>
+
+      <div class="divide-border divide-y">
+        {ecosystem.map(item => (
+          <article class="grid grid-cols-[72px_1fr] gap-4 py-5 first:pt-0">
+            <span class="text-foreground/38 pt-0.5 text-xs">{item.type}</span>
+            <div>
+              <h3 class="font-semibold">{item.name}</h3>
+              <p class="text-foreground/48 mt-1 text-sm leading-6">{item.note}</p>
+            </div>
+          </article>
+        ))}
       </div>
     </section>
   </main>
+
   <Footer />
 </Layout>
+
+<style>
+  .featured-visual {
+    background:
+      radial-gradient(circle at 78% 22%, rgba(113, 155, 184, 0.26), transparent 26%),
+      linear-gradient(145deg, #11161c 0%, #151c24 56%, #0b0e12 100%);
+  }
+
+  .card-shape {
+    position: absolute;
+    right: -5%;
+    width: 56%;
+    aspect-ratio: 1.6;
+    border: 1px solid rgb(255 255 255 / 0.11);
+    border-radius: 14px;
+    background: linear-gradient(145deg, rgb(255 255 255 / 0.08), rgb(255 255 255 / 0.015));
+    box-shadow: 0 20px 60px rgb(0 0 0 / 0.25);
+    transform-origin: center;
+  }
+
+  .card-shape-a {
+    top: 18%;
+    transform: rotate(-11deg);
+  }
+
+  .card-shape-b {
+    top: 36%;
+    right: -11%;
+    transform: rotate(8deg);
+  }
+
+  .glow {
+    position: absolute;
+    inset: auto -15% -35% auto;
+    width: 70%;
+    aspect-ratio: 1;
+    border-radius: 999px;
+    background: rgb(73 116 146 / 0.16);
+    filter: blur(50px);
+  }
+
+  @media (max-width: 639px) {
+    .featured-story {
+      margin-inline: 0;
+    }
+  }
+</style>

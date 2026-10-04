@@ -5,21 +5,24 @@ import IconSearch from "@/assets/icons/IconSearch.svg";
 import IconMoon from "@/assets/icons/IconMoon.svg";
 import IconSunHigh from "@/assets/icons/IconSunHigh.svg";
 import config from "@/config";
+import { getSiteCopy, normalizeLocale, localizedPath } from "@/i18n/site";
 
+const locale = normalizeLocale(Astro.currentLocale);
+const t = getSiteCopy(locale);
 const nav = [
-  { href: "/cards", label: "U 卡" },
-  { href: "/compare", label: "对比" },
-  { href: "/posts", label: "资讯" },
-  { href: "/tags", label: "专题" },
+  { href: "/cards", label: t.nav.cards },
+  { href: "/compare", label: t.nav.compare },
+  { href: "/posts", label: t.nav.news },
 ];
 
-const currentPath = Astro.url.pathname;
-const active = (href: string) => currentPath === href || currentPath.startsWith(href + "/");
+const rawPath = Astro.url.pathname.replace(/^\/(en|ja)(?=\/|$)/, "") || "/";
+const active = (href: string) => rawPath === href || rawPath.startsWith(href + "/");
+const langHref = (target: "zh-CN" | "en" | "ja") => localizedPath(rawPath, target);
 ---
 
 <header class="app-layout">
   <div class="border-border flex min-h-16 items-center justify-between border-b py-4">
-    <a href="/" class="text-xl font-semibold tracking-tight sm:text-2xl">
+    <a href={localizedPath("/", locale)} class="text-xl font-semibold tracking-tight sm:text-2xl">
       {config.site.title}
     </a>
 
@@ -27,29 +30,27 @@ const active = (href: string) => currentPath === href || currentPath.startsWith(
       <ul id="menu-items" class="hidden items-center gap-1 sm:flex">
         {nav.map(item => (
           <li>
-            <a
-              href={item.href}
-              class:list={[
-                "hover:text-accent px-3 py-2 text-sm font-medium",
-                active(item.href) && "text-accent",
-              ]}
-            >
-              {item.label}
-            </a>
+            <a href={localizedPath(item.href, locale)} class:list={["hover:text-accent px-3 py-2 text-sm font-medium", active(item.href) && "text-accent"]}>{item.label}</a>
           </li>
         ))}
       </ul>
 
-      <a href="/search" aria-label="搜索" class="relative size-9">
+      <div class="hidden items-center gap-1 sm:flex">
+        <a href={langHref("zh-CN")} class:list={["px-2 py-2 text-xs", locale === "zh-CN" ? "text-accent font-semibold" : "text-foreground/50"]}>中</a>
+        <a href={langHref("en")} class:list={["px-2 py-2 text-xs", locale === "en" ? "text-accent font-semibold" : "text-foreground/50"]}>EN</a>
+        <a href={langHref("ja")} class:list={["px-2 py-2 text-xs", locale === "ja" ? "text-accent font-semibold" : "text-foreground/50"]}>日</a>
+      </div>
+
+      <a href={localizedPath("/search", locale)} aria-label={t.search} class="relative size-9">
         <IconSearch class="absolute top-1/2 left-1/2 size-5 -translate-x-1/2 -translate-y-1/2" />
       </a>
 
-      <button id="theme-btn" class="relative size-9" aria-label="切换主题">
+      <button id="theme-btn" class="relative size-9" aria-label={t.theme}>
         <IconMoon class="absolute top-1/2 left-1/2 size-5 -translate-x-1/2 -translate-y-1/2 scale-100 dark:scale-0" />
         <IconSunHigh class="absolute top-1/2 left-1/2 size-5 -translate-x-1/2 -translate-y-1/2 scale-0 dark:scale-100" />
       </button>
 
-      <button id="menu-btn" class="relative size-9 sm:hidden" aria-label="打开菜单" aria-expanded="false">
+      <button id="menu-btn" class="relative size-9 sm:hidden" aria-label={t.menu} aria-expanded="false">
         <IconMenuDeep id="menu-icon" class="absolute top-1/2 left-1/2 size-5 -translate-x-1/2 -translate-y-1/2" />
         <IconX id="close-icon" class="absolute top-1/2 left-1/2 hidden size-5 -translate-x-1/2 -translate-y-1/2" />
       </button>
@@ -58,9 +59,12 @@ const active = (href: string) => currentPath === href || currentPath.startsWith(
 
   <div id="mobile-menu" class="border-border hidden border-b py-3 sm:hidden">
     <div class="flex flex-col">
-      {nav.map(item => (
-        <a href={item.href} class="hover:text-accent py-2 text-sm font-medium">{item.label}</a>
-      ))}
+      {nav.map(item => <a href={localizedPath(item.href, locale)} class="hover:text-accent py-2 text-sm font-medium">{item.label}</a>)}
+      <div class="border-border mt-2 flex gap-4 border-t pt-3">
+        <a href={langHref("zh-CN")} class:list={["text-sm", locale === "zh-CN" ? "text-accent font-semibold" : "text-foreground/55"]}>简体中文</a>
+        <a href={langHref("en")} class:list={["text-sm", locale === "en" ? "text-accent font-semibold" : "text-foreground/55"]}>English</a>
+        <a href={langHref("ja")} class:list={["text-sm", locale === "ja" ? "text-accent font-semibold" : "text-foreground/55"]}>日本語</a>
+      </div>
     </div>
   </div>
 </header>

@@ -1,0 +1,18 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import { getSiteCopy, normalizeLocale, localizedPath } from "@/i18n/site";
+const locale = normalizeLocale(Astro.currentLocale);
+const t = getSiteCopy(locale);
+---
+<Layout title={t.compare.title}>
+  <Header />
+  <main id="main-content" class="app-layout py-10 sm:py-14">
+    <p class="text-foreground/45 mb-2 text-xs tracking-[0.18em] uppercase">Compare</p>
+    <h1 class="text-4xl font-bold tracking-tight">{t.compare.title}</h1>
+    <p class="text-foreground/60 mt-4 max-w-xl leading-7">{t.compare.intro}</p>
+    <a href={localizedPath("/cards", locale)} class="text-accent mt-8 inline-block text-sm">{t.compare.back}</a>
+  </main>
+  <Footer />
+</Layout>

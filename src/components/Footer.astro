@@ -1,5 +1,8 @@
 ---
+import { getSiteCopy, normalizeLocale } from "@/i18n/site";
 const currentYear = new Date().getFullYear();
+const locale = normalizeLocale(Astro.currentLocale);
+const t = getSiteCopy(locale);
 ---
 
 <footer class="app-layout mt-auto">
@@ -7,7 +10,7 @@ const currentYear = new Date().getFullYear();
     <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
       <div>
         <div class="font-semibold">U Card Journal</div>
-        <div class="text-foreground/50 mt-1 text-xs">U 卡 · 虚拟卡 · 交易所 · 钱包 · 跨境支付资讯</div>
+        <div class="text-foreground/50 mt-1 text-xs">{t.footer}</div>
       </div>
       <div class="text-foreground/45 text-xs">© {currentYear} U Card Journal</div>
     </div>

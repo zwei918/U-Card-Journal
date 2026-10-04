@@ -1,0 +1,44 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import { normalizeLocale } from "@/i18n/site";
+
+const locale = normalizeLocale(Astro.currentLocale);
+const copy = locale === "en" ? {
+  title: "News & Reviews",
+  intro: "Fee changes, KYC policy, region support, mobile payments, card reviews, exchanges, wallets, and risk updates.",
+  items: [
+    ["Choosing a crypto card in 2026: look beyond “no KYC”", "Review · Oct 5, 2026"],
+    ["Apple Pay support update: how to verify a card before applying", "Payments · Oct 5, 2026"],
+    ["Why KYC policy changes need long-term tracking", "Compliance · Oct 4, 2026"],
+    ["From exchange to wallet to card: understanding the fund flow", "Guide · Oct 3, 2026"],
+  ],
+} : {
+  title: "ニュース & レビュー",
+  intro: "手数料変更、KYC、対応地域、モバイル決済、カードレビュー、取引所、ウォレット、リスク情報を整理します。",
+  items: [
+    ["2026 年のカード選びで「KYC 不要」以上に見るべきこと", "レビュー · 2026年10月5日"],
+    ["Apple Pay 対応状況：申込前に確認すべきポイント", "決済 · 2026年10月5日"],
+    ["KYC ポリシー変更を長期的に追うべき理由", "コンプライアンス · 2026年10月4日"],
+    ["取引所からウォレット、カードまで：資金経路の見方", "ガイド · 2026年10月3日"],
+  ],
+};
+---
+<Layout title={copy.title}>
+  <Header />
+  <main id="main-content" class="app-layout py-10 sm:py-14">
+    <p class="text-foreground/45 mb-2 text-xs tracking-[0.18em] uppercase">Journal</p>
+    <h1 class="text-4xl font-bold tracking-tight">{copy.title}</h1>
+    <p class="text-foreground/60 mt-4 max-w-xl leading-7">{copy.intro}</p>
+    <div class="border-border mt-8 border-b">
+      {copy.items.map(([title, meta]) => (
+        <article class="border-border border-t py-5">
+          <p class="text-foreground/45 mb-2 text-xs">{meta}</p>
+          <h2 class="text-lg font-semibold leading-7">{title}</h2>
+        </article>
+      ))}
+    </div>
+  </main>
+  <Footer />
+</Layout>

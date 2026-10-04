@@ -1,0 +1,92 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import { getSiteCopy, normalizeLocale, localizedPath } from "@/i18n/site";
+
+const locale = normalizeLocale(Astro.currentLocale);
+const t = getSiteCopy(locale);
+
+const latest = locale === "en" ? [
+  { title: "A crypto card updates top-up fees and regional rules", meta: "Fees · 2 hours ago" },
+  { title: "Apple Pay support update: which cards currently work", meta: "Payments · Today" },
+  { title: "How to judge long-term card reliability as KYC gets stricter", meta: "Compliance · Yesterday" },
+] : locale === "ja" ? [
+  { title: "ある暗号資産カードが入金手数料と地域ルールを変更", meta: "手数料 · 2時間前" },
+  { title: "Apple Pay 対応状況を更新：現在利用できるカード", meta: "決済 · 今日" },
+  { title: "KYC 強化後に長期利用できるカードを見極める方法", meta: "コンプライアンス · 昨日" },
+] : [
+  { title: "某 U 卡调整充值费率，部分地区规则同步变化", meta: "费率 · 2 小时前" },
+  { title: "Apple Pay 支持范围更新：这些卡片目前可绑定", meta: "支付 · 今天" },
+  { title: "KYC 政策趋严后，如何判断一张 U 卡是否值得长期使用", meta: "合规 · 昨天" },
+];
+
+const cards = [
+  { name: "Bybit Card", score: "4.6", note: locale === "en" ? "Daily spending / Apple Pay" : locale === "ja" ? "日常決済 / Apple Pay" : "日常消费 / Apple Pay" },
+  { name: "OKX Card", score: "4.4", note: locale === "en" ? "Multi-region / crypto users" : locale === "ja" ? "複数地域 / 暗号資産ユーザー" : "多地区 / 加密资产用户" },
+  { name: "RedotPay", score: "4.3", note: locale === "en" ? "USDT payments / virtual card" : locale === "ja" ? "USDT 決済 / バーチャルカード" : "USDT 支付 / 虚拟卡" },
+];
+
+const ecosystem = [
+  { type: locale === "en" ? "Exchange" : locale === "ja" ? "取引所" : "交易所", name: "OKX", note: locale === "en" ? "Broad spot, fiat, and Web3 ecosystem" : locale === "ja" ? "現物・法定通貨・Web3 を幅広くカバー" : "现货、法币与 Web3 生态较完整" },
+  { type: locale === "en" ? "Wallet" : locale === "ja" ? "ウォレット" : "钱包", name: "OKX Wallet", note: locale === "en" ? "Multi-chain, DApp, and swap tools" : locale === "ja" ? "マルチチェーン、DApp、Swap に対応" : "多链、DApp 与 Swap 体验完整" },
+  { type: locale === "en" ? "Wallet" : locale === "ja" ? "ウォレット" : "钱包", name: "Rabby", note: locale === "en" ? "Strong transaction warnings and multi-chain UX" : locale === "ja" ? "安全警告とマルチチェーン操作に強い" : "更偏重安全提示与多链交互" },
+];
+---
+
+<Layout>
+  <Header />
+  <main id="main-content" class="app-layout pb-12">
+    <section class="border-border border-b py-10 sm:py-16">
+      <div class="max-w-2xl">
+        <p class="text-accent mb-3 text-sm font-medium">{t.home.eyebrow}</p>
+        <h1 class="text-4xl font-bold leading-tight tracking-tight sm:text-5xl">{t.home.title}</h1>
+        <p class="text-foreground/70 mt-5 max-w-xl text-base leading-7 sm:text-lg">{t.home.intro}</p>
+        <form action={localizedPath("/search", locale)} class="mt-7">
+          <label for="home-search" class="sr-only">{t.search}</label>
+          <div class="border-border flex items-center border-b py-3">
+            <input id="home-search" name="q" type="search" placeholder={t.home.searchPlaceholder} class="w-full bg-transparent text-base outline-none placeholder:text-foreground/40" />
+            <button class="text-accent ms-4 text-sm font-medium" type="submit">{t.search}</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="border-border border-b py-10 sm:py-14">
+      <p class="text-foreground/45 mb-1 text-xs tracking-[0.18em] uppercase">Featured</p>
+      <h2 class="text-2xl font-semibold">{t.home.featured}</h2>
+      <article class="mt-6 max-w-2xl">
+        <h3 class="text-2xl font-semibold leading-snug"><a href={localizedPath("/posts", locale)}>{t.home.featuredTitle}</a></h3>
+        <p class="text-foreground/65 mt-3 leading-7">{t.home.featuredDesc}</p>
+      </article>
+    </section>
+
+    <section class="border-border border-b py-10 sm:py-14">
+      <div class="mb-6 flex items-end justify-between">
+        <div><p class="text-foreground/45 mb-1 text-xs tracking-[0.18em] uppercase">Latest Updates</p><h2 class="text-2xl font-semibold">{t.home.latest}</h2></div>
+        <a href={localizedPath("/posts", locale)} class="text-accent text-sm">{t.home.allNews}</a>
+      </div>
+      <div class="divide-border divide-y">
+        {latest.map(item => <article class="py-5 first:pt-0"><p class="text-foreground/45 mb-2 text-xs">{item.meta}</p><h3 class="text-lg font-medium leading-7">{item.title}</h3></article>)}
+      </div>
+    </section>
+
+    <section class="border-border border-b py-10 sm:py-14">
+      <p class="text-foreground/45 mb-1 text-xs tracking-[0.18em] uppercase">Recommended Cards</p>
+      <h2 class="text-2xl font-semibold">{t.home.cards}</h2>
+      <div class="divide-border mt-6 divide-y">
+        {cards.map((card, index) => <article class="grid grid-cols-[36px_1fr_auto] gap-3 py-5 first:pt-0"><span class="text-foreground/35 text-sm">{String(index+1).padStart(2,"0")}</span><div><h3 class="font-semibold">{card.name}</h3><p class="text-foreground/55 mt-1 text-sm">{card.note}</p></div><div class="text-right"><div class="font-semibold">{card.score}</div><div class="text-foreground/40 text-xs">Score</div></div></article>)}
+      </div>
+      <div class="mt-3 flex gap-5 text-sm"><a href={localizedPath("/cards", locale)} class="text-accent">{t.home.allCards}</a><a href={localizedPath("/compare", locale)} class="text-accent">{t.home.compare}</a></div>
+    </section>
+
+    <section class="py-10 sm:py-14">
+      <p class="text-foreground/45 mb-1 text-xs tracking-[0.18em] uppercase">Ecosystem</p>
+      <h2 class="text-2xl font-semibold">{t.home.ecosystem}</h2>
+      <div class="divide-border mt-6 divide-y">
+        {ecosystem.map(item => <article class="grid grid-cols-[72px_1fr] gap-4 py-5 first:pt-0"><span class="text-foreground/45 text-sm">{item.type}</span><div><h3 class="font-semibold">{item.name}</h3><p class="text-foreground/55 mt-1 text-sm">{item.note}</p></div></article>)}
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

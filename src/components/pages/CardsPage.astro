@@ -1,0 +1,21 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import { getSiteCopy, normalizeLocale } from "@/i18n/site";
+const locale = normalizeLocale(Astro.currentLocale);
+const t = getSiteCopy(locale);
+const cards = [["Bybit Card","4.6","Apple Pay"],["OKX Card","4.4","Multi-region"],["RedotPay","4.3","USDT"]];
+---
+<Layout title={t.cards.title}>
+  <Header />
+  <main id="main-content" class="app-layout py-10 sm:py-14">
+    <p class="text-foreground/45 mb-2 text-xs tracking-[0.18em] uppercase">Cards</p>
+    <h1 class="text-4xl font-bold tracking-tight">{t.cards.title}</h1>
+    <p class="text-foreground/60 mt-4 max-w-xl leading-7">{t.cards.intro}</p>
+    <div class="border-border mt-8 border-b">
+      {cards.map(([name,score,note],i) => <article class="border-border grid grid-cols-[36px_1fr_auto] gap-3 border-t py-5"><span class="text-foreground/35 text-sm">{String(i+1).padStart(2,"0")}</span><div><h2 class="font-semibold">{name}</h2><p class="text-foreground/55 mt-1 text-sm">{note}</p></div><div class="text-right"><div class="font-semibold">{score}</div><div class="text-foreground/40 text-xs">Score</div></div></article>)}
+    </div>
+  </main>
+  <Footer />
+</Layout>

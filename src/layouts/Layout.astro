@@ -42,6 +42,10 @@ const rssHref = getRelativeLocaleUrl(
     <link rel="icon" type="image/svg+xml" href={getAssetPath("favicon.svg")} />
     <link rel="icon" href={getAssetPath("favicon.ico")} />
     <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" hreflang="zh-CN" href={new URL(Astro.url.pathname.replace(/^\/(en|ja)(?=\/|$)/, "") || "/", Astro.site).href} />
+    <link rel="alternate" hreflang="en" href={new URL(`/en${Astro.url.pathname.replace(/^\/(en|ja)(?=\/|$)/, "") || "/"}`, Astro.site).href} />
+    <link rel="alternate" hreflang="ja" href={new URL(`/ja${Astro.url.pathname.replace(/^\/(en|ja)(?=\/|$)/, "") || "/"}`, Astro.site).href} />
+    <link rel="alternate" hreflang="x-default" href={new URL(Astro.url.pathname.replace(/^\/(en|ja)(?=\/|$)/, "") || "/", Astro.site).href} />
     <meta name="generator" content={Astro.generator} />
 
     <!-- Font -->

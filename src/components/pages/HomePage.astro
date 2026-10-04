@@ -26,140 +26,161 @@ const latest = locale === "en"
       ];
 
 const cards = [
-  { name: "Bybit Card", score: "4.6", note: locale === "en" ? "Daily spending / Apple Pay" : locale === "ja" ? "日常決済 / Apple Pay" : "日常消费 / Apple Pay" },
-  { name: "OKX Card", score: "4.4", note: locale === "en" ? "Multi-region / crypto users" : locale === "ja" ? "複数地域 / 暗号資産ユーザー" : "多地区 / 加密资产用户" },
-  { name: "RedotPay", score: "4.3", note: locale === "en" ? "USDT payments / virtual card" : locale === "ja" ? "USDT 決済 / バーチャルカード" : "USDT 支付 / 虚拟卡" },
+  { name: "Bybit Card", score: "4.6", note: locale === "en" ? "Daily spending / Apple Pay" : locale === "ja" ? "日常決済 / Apple Pay" : "适合日常消费与 Apple Pay 用户" },
+  { name: "OKX Card", score: "4.4", note: locale === "en" ? "Multi-region / crypto users" : locale === "ja" ? "複数地域 / 暗号資産ユーザー" : "适合多地区与加密资产用户" },
+  { name: "RedotPay", score: "4.3", note: locale === "en" ? "USDT payments / virtual card" : locale === "ja" ? "USDT 決済 / バーチャルカード" : "适合 USDT 支付与虚拟卡用户" },
 ];
 
 const ecosystem = [
   { type: locale === "en" ? "Exchange" : locale === "ja" ? "取引所" : "交易所", name: "OKX", note: locale === "en" ? "Broad spot, fiat, and Web3 ecosystem" : locale === "ja" ? "現物・法定通貨・Web3 を幅広くカバー" : "现货、法币与 Web3 生态较完整" },
   { type: locale === "en" ? "Wallet" : locale === "ja" ? "ウォレット" : "钱包", name: "OKX Wallet", note: locale === "en" ? "Multi-chain, DApp, and swap tools" : locale === "ja" ? "マルチチェーン、DApp、Swap に対応" : "多链、DApp 与 Swap 体验完整" },
-  { type: locale === "en" ? "Wallet" : locale === "ja" ? "ウォレット" : "钱包", name: "Rabby", note: locale === "en" ? "Strong transaction warnings and multi-chain UX" : locale === "ja" ? "安全警告とマルチチェーン操作に強い" : "更偏重安全提示与多链交互" },
 ];
 
 const scoreLabel = locale === "en" ? "Score" : locale === "ja" ? "評価" : "评分";
 const featuredMeta = locale === "en" ? "Editor's pick · 8 min read" : locale === "ja" ? "編集部おすすめ · 8分" : "编辑推荐 · 8 分钟阅读";
+const cardsIntro = locale === "en"
+  ? "A short editor-curated list. Full fees and regional support live in Cards and Compare."
+  : locale === "ja"
+    ? "編集部が厳選した少数のカードのみ。詳細な手数料や地域対応は Cards / Compare で確認できます。"
+    : "只展示少量值得进一步了解的卡片，完整费率与地区支持放到 Cards 和 Compare。";
+const ecoIntro = locale === "en"
+  ? "Supporting tools around the card ecosystem, not a logo directory."
+  : locale === "ja"
+    ? "カード利用を支える周辺サービスを厳選。ロゴ一覧にはしません。"
+    : "作为 U 卡资金路径与支付生态的补充，只做精选，不做 Logo 导航。";
 ---
 
 <Layout>
   <Header />
 
-  <main id="main-content" class="app-layout pb-12">
-    <section class="border-border border-b py-9 sm:py-16">
+  <main id="main-content" class="app-layout pb-14">
+    <section class="border-border border-b py-10 sm:py-16">
       <div class="max-w-2xl">
-        <p class="text-accent mb-3 text-[13px] font-medium tracking-[0.02em]">{t.home.eyebrow}</p>
+        <p class="text-accent mb-3 text-[12px] font-semibold tracking-[0.04em]">{t.home.eyebrow}</p>
 
-        <h1 class="editorial-serif max-w-[680px] break-all text-[2.2rem] leading-[1.18] font-semibold tracking-[-0.04em] sm:text-5xl">
+        <h1 class="editorial-serif home-title max-w-[650px] text-[1.95rem] leading-[1.24] font-medium tracking-[-0.03em] sm:text-[2.9rem]">
           {t.home.title}
         </h1>
 
-        <p class="text-foreground/62 mt-5 max-w-xl text-[15px] leading-7 sm:text-lg">
+        <p class="text-foreground/62 mt-5 max-w-xl text-[15px] leading-7 sm:text-[17px]">
           {t.home.intro}
         </p>
 
         <form action={localizedPath("/search", locale)} class="mt-7">
           <label for="home-search" class="sr-only">{t.search}</label>
-          <div class="border-border flex items-center border-b py-3.5">
+          <div class="border-border bg-white/60 dark:bg-white/3 flex items-center border px-4 py-3.5">
             <input
               id="home-search"
               name="q"
               type="search"
               placeholder={t.home.searchPlaceholder}
-              class="w-full bg-transparent text-[15px] outline-none placeholder:text-foreground/35"
+              class="min-w-0 flex-1 bg-transparent text-[15px] outline-none placeholder:text-foreground/35"
             />
-            <button class="text-accent ms-4 shrink-0 text-sm font-medium" type="submit">{t.search}</button>
+            <button class="text-accent ms-4 shrink-0 text-sm font-semibold" type="submit">{t.search}</button>
           </div>
         </form>
       </div>
     </section>
 
-    <section class="border-border border-b py-10 sm:py-14">
+    <section class="border-border border-b py-11 sm:py-16">
       <div class="mb-6 flex items-end justify-between gap-4">
         <div>
-          <p class="text-foreground/38 mb-1 text-[10px] tracking-[0.22em] uppercase">Featured</p>
-          <h2 class="editorial-serif text-[1.7rem] leading-tight font-semibold">{t.home.featured}</h2>
+          <p class="text-foreground/38 mb-1.5 text-[10px] tracking-[0.2em] uppercase">Featured</p>
+          <h2 class="editorial-serif text-[1.65rem] leading-tight font-medium">{t.home.featured}</h2>
         </div>
       </div>
 
-      <article class="featured-story overflow-hidden border border-black/8 bg-[#10151b] text-white dark:border-white/10">
-        <div class="featured-visual relative min-h-[250px] p-6 sm:min-h-[320px] sm:p-8">
-          <div class="relative z-10 flex min-h-[200px] max-w-[86%] flex-col justify-end sm:min-h-[260px]">
-            <p class="mb-3 text-xs text-white/55">{featuredMeta}</p>
-            <h3 class="editorial-serif break-all text-[1.62rem] leading-[1.3] font-semibold tracking-[-0.025em] sm:text-3xl">
-              <a href={localizedPath("/posts", locale)}>{t.home.featuredTitle}</a>
-            </h3>
-            <p class="mt-3 max-w-xl text-sm leading-6 text-white/65">{t.home.featuredDesc}</p>
+      <article>
+        <a href={localizedPath("/posts", locale)} class="group block">
+          <div class="feature-art border-border relative aspect-[16/9] overflow-hidden border bg-[#f2f4f5] dark:bg-[#1d2327]">
+            <div class="feature-grid" aria-hidden="true"></div>
+            <div class="feature-card feature-card-one" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="feature-card feature-card-two" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="feature-caption" aria-hidden="true">U CARD / 2026</div>
           </div>
-          <div class="card-shape card-shape-a" aria-hidden="true"></div>
-          <div class="card-shape card-shape-b" aria-hidden="true"></div>
-          <div class="glow" aria-hidden="true"></div>
-        </div>
+
+          <div class="pt-5">
+            <p class="text-foreground/42 mb-2 text-[11px]">{featuredMeta}</p>
+            <h3 class="editorial-serif max-w-2xl text-[1.55rem] leading-[1.38] font-medium tracking-[-0.02em] group-hover:text-accent sm:text-[1.9rem]">
+              {t.home.featuredTitle}
+            </h3>
+            <p class="text-foreground/58 mt-3 max-w-2xl text-[14px] leading-6 sm:text-[15px] sm:leading-7">
+              {t.home.featuredDesc}
+            </p>
+          </div>
+        </a>
       </article>
     </section>
 
-    <section class="border-border border-b py-10 sm:py-14">
+    <section class="border-border border-b py-11 sm:py-16">
       <div class="mb-6 flex items-end justify-between gap-4">
         <div>
-          <p class="text-foreground/38 mb-1 text-[10px] tracking-[0.22em] uppercase">Latest Updates</p>
-          <h2 class="editorial-serif text-[1.7rem] leading-tight font-semibold">{t.home.latest}</h2>
+          <p class="text-foreground/38 mb-1.5 text-[10px] tracking-[0.2em] uppercase">Latest Updates</p>
+          <h2 class="editorial-serif text-[1.65rem] leading-tight font-medium">{t.home.latest}</h2>
         </div>
-        <a href={localizedPath("/posts", locale)} class="text-accent shrink-0 text-sm">{t.home.allNews}</a>
+        <a href={localizedPath("/posts", locale)} class="text-accent shrink-0 text-[13px] font-medium">{t.home.allNews}</a>
       </div>
 
-      <div class="divide-border divide-y">
+      <div class="divide-border divide-y border-border border-t">
         {latest.map((item, index) => (
-          <article class="grid grid-cols-[28px_1fr] gap-3 py-5 first:pt-0">
-            <span class="text-foreground/28 pt-1 text-[11px]">{String(index + 1).padStart(2, "0")}</span>
+          <article class="grid grid-cols-[30px_1fr] gap-3 py-5.5">
+            <span class="text-foreground/25 pt-0.5 text-[11px] tabular-nums">{String(index + 1).padStart(2, "0")}</span>
             <div>
-              <p class="text-foreground/40 mb-1.5 text-[11px]">{item.meta}</p>
-              <h3 class="text-[1.02rem] leading-7 font-medium">{item.title}</h3>
+              <p class="text-foreground/42 mb-1.5 text-[11px]">{item.meta}</p>
+              <h3 class="text-[1rem] leading-7 font-medium">{item.title}</h3>
             </div>
           </article>
         ))}
       </div>
     </section>
 
-    <section class="border-border border-b py-10 sm:py-14">
+    <section class="border-border border-b py-11 sm:py-16">
       <div class="mb-6">
-        <p class="text-foreground/38 mb-1 text-[10px] tracking-[0.22em] uppercase">Recommended Cards</p>
-        <h2 class="editorial-serif text-[1.7rem] leading-tight font-semibold">{t.home.cards}</h2>
+        <p class="text-foreground/38 mb-1.5 text-[10px] tracking-[0.2em] uppercase">Recommended Cards</p>
+        <h2 class="editorial-serif text-[1.65rem] leading-tight font-medium">{t.home.cards}</h2>
+        <p class="text-foreground/52 mt-2 max-w-xl text-[13px] leading-6">{cardsIntro}</p>
       </div>
 
-      <div class="divide-border divide-y">
+      <div class="divide-border divide-y border-border border-t">
         {cards.map((card, index) => (
-          <article class="grid grid-cols-[30px_1fr_auto] items-start gap-3 py-5 first:pt-0">
-            <span class="text-foreground/28 pt-0.5 text-[11px]">{String(index + 1).padStart(2, "0")}</span>
+          <article class="grid grid-cols-[28px_1fr_auto] items-start gap-3 py-5.5">
+            <span class="text-foreground/25 pt-0.5 text-[11px]">{String(index + 1).padStart(2, "0")}</span>
             <div>
-              <h3 class="font-semibold">{card.name}</h3>
-              <p class="text-foreground/48 mt-1 text-sm leading-6">{card.note}</p>
+              <h3 class="text-[15px] font-semibold">{card.name}</h3>
+              <p class="text-foreground/50 mt-1 text-[13px] leading-6">{card.note}</p>
             </div>
-            <div class="text-right">
-              <div class="text-[15px] font-semibold">{card.score}</div>
-              <div class="text-foreground/35 mt-0.5 text-[10px]">{scoreLabel}</div>
+            <div class="min-w-[44px] text-right">
+              <div class="text-[14px] font-semibold tabular-nums">{card.score}</div>
+              <div class="text-foreground/34 mt-0.5 text-[10px]">{scoreLabel}</div>
             </div>
           </article>
         ))}
       </div>
 
-      <div class="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+      <div class="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-[13px] font-medium">
         <a href={localizedPath("/cards", locale)} class="text-accent">{t.home.allCards}</a>
         <a href={localizedPath("/compare", locale)} class="text-accent">{t.home.compare}</a>
       </div>
     </section>
 
-    <section class="py-10 sm:py-14">
+    <section class="py-11 sm:py-16">
       <div class="mb-6">
-        <p class="text-foreground/38 mb-1 text-[10px] tracking-[0.22em] uppercase">Ecosystem</p>
-        <h2 class="editorial-serif text-[1.7rem] leading-tight font-semibold">{t.home.ecosystem}</h2>
+        <p class="text-foreground/38 mb-1.5 text-[10px] tracking-[0.2em] uppercase">Ecosystem</p>
+        <h2 class="editorial-serif text-[1.65rem] leading-tight font-medium">{t.home.ecosystem}</h2>
+        <p class="text-foreground/52 mt-2 max-w-xl text-[13px] leading-6">{ecoIntro}</p>
       </div>
 
-      <div class="divide-border divide-y">
+      <div class="divide-border divide-y border-border border-t">
         {ecosystem.map(item => (
-          <article class="grid grid-cols-[72px_1fr] gap-4 py-5 first:pt-0">
-            <span class="text-foreground/38 pt-0.5 text-xs">{item.type}</span>
+          <article class="grid grid-cols-[68px_1fr] gap-4 py-5.5">
+            <span class="text-foreground/38 pt-0.5 text-[11px]">{item.type}</span>
             <div>
-              <h3 class="font-semibold">{item.name}</h3>
-              <p class="text-foreground/48 mt-1 text-sm leading-6">{item.note}</p>
+              <h3 class="text-[15px] font-semibold">{item.name}</h3>
+              <p class="text-foreground/50 mt-1 text-[13px] leading-6">{item.note}</p>
             </div>
           </article>
         ))}
@@ -171,48 +192,90 @@ const featuredMeta = locale === "en" ? "Editor's pick · 8 min read" : locale ==
 </Layout>
 
 <style>
-  .featured-visual {
+  .home-title {
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  .feature-art {
     background:
-      radial-gradient(circle at 78% 22%, rgba(113, 155, 184, 0.26), transparent 26%),
-      linear-gradient(145deg, #11161c 0%, #151c24 56%, #0b0e12 100%);
+      linear-gradient(180deg, rgb(255 255 255 / 0.56), rgb(255 255 255 / 0.08)),
+      #eef1f2;
   }
 
-  .card-shape {
+  :global(html[data-theme="dark"]) .feature-art {
+    background:
+      linear-gradient(180deg, rgb(255 255 255 / 0.04), transparent),
+      #1d2327;
+  }
+
+  .feature-grid {
     position: absolute;
-    right: -5%;
-    width: 56%;
-    aspect-ratio: 1.6;
-    border: 1px solid rgb(255 255 255 / 0.11);
-    border-radius: 14px;
-    background: linear-gradient(145deg, rgb(255 255 255 / 0.08), rgb(255 255 255 / 0.015));
-    box-shadow: 0 20px 60px rgb(0 0 0 / 0.25);
-    transform-origin: center;
+    inset: 0;
+    opacity: 0.55;
+    background-image:
+      linear-gradient(to right, rgb(49 95 125 / 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(49 95 125 / 0.08) 1px, transparent 1px);
+    background-size: 28px 28px;
   }
 
-  .card-shape-a {
-    top: 18%;
-    transform: rotate(-11deg);
-  }
-
-  .card-shape-b {
-    top: 36%;
-    right: -11%;
-    transform: rotate(8deg);
-  }
-
-  .glow {
+  .feature-card {
     position: absolute;
-    inset: auto -15% -35% auto;
-    width: 70%;
-    aspect-ratio: 1;
-    border-radius: 999px;
-    background: rgb(73 116 146 / 0.16);
-    filter: blur(50px);
+    width: 48%;
+    aspect-ratio: 1.58;
+    border: 1px solid rgb(49 95 125 / 0.25);
+    background: rgb(252 251 248 / 0.9);
+    box-shadow: 0 12px 30px rgb(30 50 65 / 0.06);
+    padding: 18px;
+  }
+
+  .feature-card span {
+    display: block;
+    height: 3px;
+    margin-top: 9px;
+    background: rgb(49 95 125 / 0.2);
+  }
+
+  .feature-card span:first-child {
+    width: 24%;
+    height: 6px;
+    margin-top: 0;
+    background: rgb(49 95 125 / 0.62);
+  }
+
+  .feature-card span:nth-child(2) {
+    width: 72%;
+  }
+
+  .feature-card span:nth-child(3) {
+    width: 46%;
+  }
+
+  .feature-card-one {
+    top: 24%;
+    left: 12%;
+    transform: rotate(-5deg);
+  }
+
+  .feature-card-two {
+    top: 34%;
+    right: 9%;
+    transform: rotate(6deg);
+  }
+
+  .feature-caption {
+    position: absolute;
+    right: 15px;
+    bottom: 12px;
+    color: rgb(49 95 125 / 0.48);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
   }
 
   @media (max-width: 639px) {
-    .featured-story {
-      margin-inline: 0;
+    .feature-card {
+      padding: 14px;
     }
   }
 </style>

@@ -23,13 +23,13 @@ const langHref = (target: "zh-CN" | "en" | "ja") => localizedPath(rawPath, targe
 <header class="app-layout">
   <div class="border-border flex min-h-20 items-center justify-between border-b py-4 sm:min-h-18 sm:py-5">
     <div class="min-w-0">
-      <a href={localizedPath("/", locale)} class="editorial-serif block text-[1.55rem] leading-none font-semibold tracking-tight sm:text-2xl">
+      <a href={localizedPath("/", locale)} class="editorial-serif block text-[1.42rem] leading-none font-semibold tracking-tight sm:text-2xl">
         {config.site.title}
       </a>
       <p class="text-foreground/45 mt-2 max-w-[220px] truncate text-[11px] sm:hidden">{t.tagline}</p>
     </div>
 
-    <nav class="flex shrink-0 items-center gap-1">
+    <nav class="flex shrink-0 items-center gap-0.5">
       <ul class="hidden items-center gap-1 sm:flex">
         {nav.map(item => (
           <li>
@@ -52,7 +52,7 @@ const langHref = (target: "zh-CN" | "en" | "ja") => localizedPath(rawPath, targe
         <a href={langHref("ja")} class:list={["px-2 py-2 text-xs", locale === "ja" ? "text-accent font-semibold" : "text-foreground/45"]}>日</a>
       </div>
 
-      <a href={localizedPath("/search", locale)} aria-label={t.search} class="relative size-10">
+      <a href={localizedPath("/search", locale)} aria-label={t.search} class="relative size-9">
         <IconSearch class="absolute top-1/2 left-1/2 size-[21px] -translate-x-1/2 -translate-y-1/2" />
       </a>
 
@@ -61,7 +61,7 @@ const langHref = (target: "zh-CN" | "en" | "ja") => localizedPath(rawPath, targe
         <IconSunHigh class="absolute top-1/2 left-1/2 size-5 -translate-x-1/2 -translate-y-1/2 scale-0 dark:scale-100" />
       </button>
 
-      <button id="menu-btn" class="relative size-10 sm:hidden" aria-label={t.menu} aria-expanded="false">
+      <button id="menu-btn" class="relative size-9 sm:hidden" aria-label={t.menu} aria-expanded="false">
         <IconMenuDeep id="menu-icon" class="absolute top-1/2 left-1/2 size-[22px] -translate-x-1/2 -translate-y-1/2" />
         <IconX id="close-icon" class="absolute top-1/2 left-1/2 hidden size-[22px] -translate-x-1/2 -translate-y-1/2" />
       </button>

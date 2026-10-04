@@ -20,7 +20,7 @@ const active = (href: string) => rawPath === href || rawPath.startsWith(href + "
 const langHref = (target: "zh-CN" | "en" | "ja") => localizedPath(rawPath, target);
 ---
 
-<header class="app-layout">
+<header class="site-shell">
   <div class="border-border flex min-h-20 items-center justify-between border-b py-4 sm:min-h-18 sm:py-5">
     <div class="min-w-0">
       <a href={localizedPath("/", locale)} class="editorial-serif block text-[1.42rem] leading-none font-semibold tracking-tight sm:text-2xl">
@@ -100,3 +100,11 @@ const langHref = (target: "zh-CN" | "en" | "ja") => localizedPath(rawPath, targe
   setupMenu();
   document.addEventListener("astro:after-swap", setupMenu);
 </script>
+
+<style>
+  .site-shell {
+    width: calc(100% - 2rem);
+    max-width: 72rem;
+    margin-inline: auto;
+  }
+</style>

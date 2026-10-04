@@ -10,81 +10,114 @@ const t = getSiteCopy(locale);
 const copy = locale === "en" ? {
   heroKicker: "Independent crypto card research",
   heroTitle: "Find the crypto card that actually fits you.",
-  heroBody: "Compare fees, availability, KYC, Apple Pay, Google Pay and real-world changes — without digging through scattered product pages.",
+  heroBody: "Compare fees, availability, KYC, payment support and recent changes in one place.",
+  search: "Search cards, fees, KYC, Apple Pay...",
   findCard: "Find a card",
   compare: "Compare cards",
-  database: "Browse database",
-  topPicks: "Top picks",
-  topPicksSub: "A short editorial shortlist — not a paid ranking.",
-  quickCompare: "Quick compare",
-  browseNeed: "Browse by need",
-  browseRegion: "Browse by region",
-  changes: "Latest changes",
-  changesSub: "Policy, fee and availability updates that can change your decision.",
-  guides: "Reviews & guides",
-  ecosystem: "Payment ecosystem",
-  viewAll: "View all",
-  checked: "Last checked",
+  browseAll: "Browse all cards",
+  overview: "Database overview",
+  liveCards: "Live cards",
+  trackedFields: "Tracked fields",
+  verified: "Update status",
+  topPicks: "Editor's picks",
+  topPicksSub: "A short independent shortlist, not a paid ranking.",
   bestFor: "Best for",
   fee: "Top-up fee",
   kyc: "KYC",
   applePay: "Apple Pay",
   score: "Score",
-  updated: "Updated",
+  checked: "Last checked",
+  quickCompare: "Quick compare",
+  quickCompareSub: "See the most decision-critical differences first.",
+  browseNeed: "Browse by need",
+  browseRegion: "Browse by region",
+  changes: "Latest changes",
+  changesSub: "Fee, regional, KYC and payment-support updates.",
+  guides: "Reviews & guides",
+  ecosystem: "Payment ecosystem",
+  viewAll: "View all",
+  changeTypes: ["Region", "Payment", "Fees"],
 } : locale === "ja" ? {
   heroKicker: "独立した暗号資産カード調査",
   heroTitle: "自分に本当に合う U カードを見つける。",
-  heroBody: "手数料、地域対応、KYC、Apple Pay、Google Pay、最新変更を一か所で比較できます。",
+  heroBody: "手数料、地域、KYC、決済対応、最新の変更を一か所で比較できます。",
+  search: "カード、手数料、KYC、Apple Pay を検索...",
   findCard: "カードを探す",
   compare: "カードを比較",
-  database: "データベースを見る",
+  browseAll: "すべてのカード",
+  overview: "データベース概要",
+  liveCards: "利用可能カード",
+  trackedFields: "追跡項目",
+  verified: "更新状況",
   topPicks: "編集部の厳選",
-  topPicksSub: "広告順位ではなく、少数の候補に絞ります。",
-  quickCompare: "クイック比較",
-  browseNeed: "目的から探す",
-  browseRegion: "地域から探す",
-  changes: "最新の変更",
-  changesSub: "手数料・地域・KYC・決済対応の変更を追跡。",
-  guides: "レビューとガイド",
-  ecosystem: "決済エコシステム",
-  viewAll: "すべて見る",
-  checked: "最終確認",
+  topPicksSub: "広告順位ではなく、独立した少数の候補です。",
   bestFor: "おすすめ用途",
   fee: "入金手数料",
   kyc: "KYC",
   applePay: "Apple Pay",
   score: "評価",
-  updated: "更新",
+  checked: "最終確認",
+  quickCompare: "クイック比較",
+  quickCompareSub: "判断に必要な違いだけを先に比較します。",
+  browseNeed: "目的から探す",
+  browseRegion: "地域から探す",
+  changes: "最新の変更",
+  changesSub: "手数料、地域、KYC、決済対応の更新を追跡します。",
+  guides: "レビューとガイド",
+  ecosystem: "決済エコシステム",
+  viewAll: "すべて見る",
+  changeTypes: ["地域", "決済", "手数料"],
 } : {
   heroKicker: "独立 U 卡研究与比较",
   heroTitle: "找到真正适合你的 U 卡。",
-  heroBody: "把费率、地区、KYC、Apple Pay、Google Pay 和最新变化放到一起比较，不用再翻几十个官网和推广页面。",
+  heroBody: "把费率、地区、KYC、支付支持和最新变化放在一起比较，少看推广，多看真正影响使用的差异。",
+  search: "搜索 U 卡、费率、KYC、Apple Pay...",
   findCard: "找适合我的卡",
   compare: "开始对比",
-  database: "浏览全部卡片",
+  browseAll: "浏览全部卡片",
+  overview: "数据库概览",
+  liveCards: "可用卡片",
+  trackedFields: "追踪字段",
+  verified: "更新状态",
   topPicks: "编辑精选",
-  topPicksSub: "只给少量结论，不做付费排名。",
-  quickCompare: "快速对比",
-  browseNeed: "按需求找卡",
-  browseRegion: "按地区找卡",
-  changes: "最新变化",
-  changesSub: "真正会影响你决策的费率、地区、KYC 与支付支持变化。",
-  guides: "评测与指南",
-  ecosystem: "支付生态",
-  viewAll: "查看全部",
-  checked: "最后核验",
+  topPicksSub: "独立筛选少量值得优先了解的卡片，不做付费排名。",
   bestFor: "适合",
   fee: "充值费",
   kyc: "KYC",
   applePay: "Apple Pay",
   score: "评分",
-  updated: "更新",
+  checked: "最后核验",
+  quickCompare: "快速对比",
+  quickCompareSub: "先看真正影响选择的几个关键差异。",
+  browseNeed: "按需求找卡",
+  browseRegion: "按地区找卡",
+  changes: "最新变化",
+  changesSub: "持续追踪费率、地区、KYC 与支付支持变化。",
+  guides: "评测与指南",
+  ecosystem: "支付生态",
+  viewAll: "查看全部",
+  changeTypes: ["地区", "支付", "费率"],
 };
 
 const topPicks = [
-  { name: "Bybit Card", score: "4.6", best: locale === "en" ? "Daily spending" : locale === "ja" ? "日常決済" : "日常消费", fee: "0–1%", kyc: locale === "en" ? "Required" : locale === "ja" ? "必要" : "需要", pay: "✓", checked: "2026-10-04" },
-  { name: "OKX Card", score: "4.4", best: locale === "en" ? "Crypto-native users" : locale === "ja" ? "暗号資産ユーザー" : "加密资产用户", fee: "Varies", kyc: locale === "en" ? "Required" : locale === "ja" ? "必要" : "需要", pay: "✓", checked: "2026-10-03" },
-  { name: "RedotPay", score: "4.3", best: locale === "en" ? "USDT spending" : locale === "ja" ? "USDT 決済" : "USDT 支付", fee: "1%", kyc: locale === "en" ? "Required" : locale === "ja" ? "必要" : "需要", pay: "—", checked: "2026-10-02" },
+  {
+    name: "Bybit Card", score: "4.6",
+    best: locale === "en" ? "Daily spending" : locale === "ja" ? "日常決済" : "日常消费",
+    note: locale === "en" ? "Balanced for everyday use and mobile wallets." : locale === "ja" ? "日常利用とモバイルウォレットのバランスが良い。" : "日常消费与移动支付体验更均衡。",
+    fee: "0–1%", kyc: locale === "en" ? "Required" : locale === "ja" ? "必要" : "需要", pay: "支持", checked: "2026-10-04"
+  },
+  {
+    name: "OKX Card", score: "4.4",
+    best: locale === "en" ? "Crypto-native users" : locale === "ja" ? "暗号資産ユーザー" : "加密资产用户",
+    note: locale === "en" ? "Strong fit for users already inside the OKX ecosystem." : locale === "ja" ? "OKX エコシステム利用者との相性が良い。" : "更适合已经在 OKX 生态内的用户。",
+    fee: "浮动", kyc: locale === "en" ? "Required" : locale === "ja" ? "必要" : "需要", pay: "支持", checked: "2026-10-03"
+  },
+  {
+    name: "RedotPay", score: "4.3",
+    best: locale === "en" ? "USDT spending" : locale === "ja" ? "USDT 決済" : "USDT 支付",
+    note: locale === "en" ? "Simple path from stablecoins to card spending." : locale === "ja" ? "ステーブルコインからカード決済までが分かりやすい。" : "从稳定币到卡片消费的路径更直接。",
+    fee: "1%", kyc: locale === "en" ? "Required" : locale === "ja" ? "必要" : "需要", pay: "—", checked: "2026-10-02"
+  },
 ];
 
 const needs = locale === "en"
@@ -99,28 +132,28 @@ const regions = locale === "en"
     ? ["中国本土", "香港", "日本", "シンガポール", "ヨーロッパ", "グローバル"]
     : ["中国大陆", "香港", "日本", "新加坡", "欧洲", "全球可用"];
 
-const changes = locale === "en"
-  ? [
-      { date: "Oct 5", name: "Bybit Card", change: "Regional availability documentation updated", type: "Region" },
-      { date: "Oct 4", name: "OKX Card", change: "Apple Pay support note re-verified", type: "Payment" },
-      { date: "Oct 3", name: "RedotPay", change: "Top-up fee data refreshed", type: "Fees" },
-    ]
-  : locale === "ja"
-    ? [
-        { date: "10/5", name: "Bybit Card", change: "地域対応ドキュメントを更新", type: "地域" },
-        { date: "10/4", name: "OKX Card", change: "Apple Pay 対応を再確認", type: "決済" },
-        { date: "10/3", name: "RedotPay", change: "入金手数料データを更新", type: "手数料" },
-      ]
-    : [
-        { date: "10 月 5 日", name: "Bybit Card", change: "地区可用性说明更新", type: "地区" },
-        { date: "10 月 4 日", name: "OKX Card", change: "Apple Pay 支持状态重新核验", type: "支付" },
-        { date: "10 月 3 日", name: "RedotPay", change: "充值费数据已更新", type: "费率" },
-      ];
+const changes = [
+  {
+    date: locale === "en" ? "Oct 5" : locale === "ja" ? "10/5" : "10 月 5 日",
+    name: "Bybit Card", type: copy.changeTypes[0],
+    change: locale === "en" ? "Regional availability documentation updated" : locale === "ja" ? "地域対応ドキュメントを更新" : "地区可用性说明更新"
+  },
+  {
+    date: locale === "en" ? "Oct 4" : locale === "ja" ? "10/4" : "10 月 4 日",
+    name: "OKX Card", type: copy.changeTypes[1],
+    change: locale === "en" ? "Apple Pay support status re-verified" : locale === "ja" ? "Apple Pay 対応を再確認" : "Apple Pay 支持状态重新核验"
+  },
+  {
+    date: locale === "en" ? "Oct 3" : locale === "ja" ? "10/3" : "10 月 3 日",
+    name: "RedotPay", type: copy.changeTypes[2],
+    change: locale === "en" ? "Top-up fee data refreshed" : locale === "ja" ? "入金手数料データを更新" : "充值费数据已更新"
+  },
+];
 
 const guides = locale === "en"
   ? [
       { title: "How to choose a crypto card in 2026", meta: "Guide · 8 min" },
-      { title: "What KYC changes mean for long-term card use", meta: "Risk · 6 min" },
+      { title: "What stricter KYC means for long-term card use", meta: "Risk · 6 min" },
     ]
   : locale === "ja"
     ? [
@@ -143,124 +176,140 @@ const ecosystem = [
   <Header />
 
   <main id="main-content">
-    <section class="app-layout border-border border-b py-10 sm:py-16">
-      <div class="max-w-2xl">
-        <p class="text-accent mb-3 text-[11px] font-semibold tracking-[0.08em] uppercase">{copy.heroKicker}</p>
-        <h1 class="editorial-serif home-title max-w-[640px] text-[2.05rem] leading-[1.2] font-medium tracking-[-0.035em] sm:text-[3rem]">
-          {copy.heroTitle}
-        </h1>
-        <p class="text-foreground/62 mt-5 max-w-xl text-[15px] leading-7 sm:text-[17px]">{copy.heroBody}</p>
+    <section class="home-shell border-border border-b py-10 sm:py-16 lg:py-20">
+      <div class="grid gap-10 lg:grid-cols-[1.3fr_.7fr] lg:items-end lg:gap-16">
+        <div>
+          <p class="section-kicker">{copy.heroKicker}</p>
+          <h1 class="home-title max-w-[720px] text-[2.15rem] leading-[1.16] font-semibold tracking-[-0.04em] sm:text-[3.2rem] lg:text-[3.65rem]">
+            {copy.heroTitle}
+          </h1>
+          <p class="text-foreground/62 mt-5 max-w-[640px] text-[15px] leading-7 sm:text-[17px]">{copy.heroBody}</p>
 
-        <form action={localizedPath("/search", locale)} class="mt-7">
-          <label for="home-search" class="sr-only">{t.search}</label>
-          <div class="border-border bg-white/70 dark:bg-white/3 flex items-center border px-4 py-3.5">
-            <input id="home-search" name="q" type="search" placeholder={t.home.searchPlaceholder}
-              class="min-w-0 flex-1 bg-transparent text-[15px] outline-none placeholder:text-foreground/35" />
-            <button class="text-accent ms-4 shrink-0 text-sm font-semibold" type="submit">{t.search}</button>
+          <form action={localizedPath("/search", locale)} class="mt-7 max-w-[680px]">
+            <label for="home-search" class="sr-only">{t.search}</label>
+            <div class="border-border bg-white/75 dark:bg-white/3 flex items-center border px-4 py-3.5">
+              <input id="home-search" name="q" type="search" placeholder={copy.search}
+                class="min-w-0 flex-1 bg-transparent text-[15px] outline-none placeholder:text-foreground/35" />
+              <button class="text-accent ms-4 shrink-0 text-sm font-semibold" type="submit">{t.search}</button>
+            </div>
+          </form>
+
+          <div class="mt-5 flex flex-wrap gap-x-5 gap-y-3 text-[13px] font-semibold">
+            <a href={localizedPath("/cards", locale)} class="text-accent">{copy.findCard} →</a>
+            <a href={localizedPath("/compare", locale)} class="text-foreground/62 hover:text-accent">{copy.compare}</a>
+            <a href={localizedPath("/cards", locale)} class="text-foreground/62 hover:text-accent">{copy.browseAll}</a>
           </div>
-        </form>
-
-        <div class="mt-5 flex flex-wrap gap-x-5 gap-y-3 text-[13px] font-semibold">
-          <a href={localizedPath("/cards", locale)} class="text-accent">{copy.findCard} →</a>
-          <a href={localizedPath("/compare", locale)} class="text-foreground/62 hover:text-accent">{copy.compare}</a>
-          <a href={localizedPath("/cards", locale)} class="text-foreground/62 hover:text-accent">{copy.database}</a>
         </div>
+
+        <aside class="border-border bg-muted/45 border p-5 sm:p-6">
+          <p class="text-foreground/42 text-[11px] font-medium">{copy.overview}</p>
+          <div class="mt-5 grid grid-cols-3 gap-4">
+            <div>
+              <div class="text-[1.55rem] font-semibold tabular-nums">3</div>
+              <p class="text-foreground/44 mt-1 text-[11px] leading-5">{copy.liveCards}</p>
+            </div>
+            <div>
+              <div class="text-[1.55rem] font-semibold tabular-nums">25</div>
+              <p class="text-foreground/44 mt-1 text-[11px] leading-5">{copy.trackedFields}</p>
+            </div>
+            <div>
+              <div class="text-[1.25rem] font-semibold">持续更新</div>
+              <p class="text-foreground/44 mt-1 text-[11px] leading-5">{copy.verified}</p>
+            </div>
+          </div>
+        </aside>
       </div>
     </section>
 
-    <section class="app-layout border-border border-b py-11 sm:py-16">
-      <div class="mb-6">
-        <p class="section-kicker">Top Picks</p>
-        <div class="flex items-end justify-between gap-4">
-          <div>
-            <h2 class="section-title">{copy.topPicks}</h2>
-            <p class="section-desc">{copy.topPicksSub}</p>
-          </div>
-          <a href={localizedPath("/cards", locale)} class="text-accent shrink-0 text-[12px] font-medium">{copy.viewAll}</a>
+    <section class="home-shell border-border border-b py-11 sm:py-16">
+      <div class="mb-7 flex items-end justify-between gap-5">
+        <div>
+          <h2 class="section-title">{copy.topPicks}</h2>
+          <p class="section-desc">{copy.topPicksSub}</p>
         </div>
+        <a href={localizedPath("/cards", locale)} class="text-accent shrink-0 text-[12px] font-medium">{copy.viewAll}</a>
       </div>
 
-      <div class="divide-border divide-y border-border border-t">
+      <div class="grid gap-4 md:grid-cols-3">
         {topPicks.map(card => (
-          <article class="grid grid-cols-[1fr_auto] gap-4 py-5.5">
-            <div>
-              <div class="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                <h3 class="text-[15px] font-semibold">{card.name}</h3>
-                <span class="text-foreground/38 text-[11px]">{copy.bestFor}: {card.best}</span>
+          <article class="border-border bg-white/55 dark:bg-white/2 flex min-h-[220px] flex-col border p-5 sm:p-6">
+            <div class="flex items-start justify-between gap-4">
+              <h3 class="text-[17px] font-semibold">{card.name}</h3>
+              <div class="text-right">
+                <div class="text-[16px] font-semibold tabular-nums">{card.score}</div>
+                <div class="text-foreground/34 mt-0.5 text-[10px]">{copy.score}</div>
               </div>
-              <div class="text-foreground/45 mt-2 flex flex-wrap gap-x-4 gap-y-1 text-[11px]">
-                <span>{copy.fee}: {card.fee}</span>
-                <span>{copy.kyc}: {card.kyc}</span>
-                <span>{copy.applePay}: {card.pay}</span>
-              </div>
-              <p class="text-foreground/32 mt-2 text-[10px]">{copy.checked}: {card.checked}</p>
             </div>
-            <div class="text-right">
-              <div class="text-[15px] font-semibold tabular-nums">{card.score}</div>
-              <div class="text-foreground/35 mt-0.5 text-[10px]">{copy.score}</div>
-            </div>
+            <p class="text-accent mt-4 text-[12px] font-medium">{copy.bestFor}：{card.best}</p>
+            <p class="text-foreground/56 mt-2 text-[13px] leading-6">{card.note}</p>
+            <dl class="border-border mt-5 grid grid-cols-3 gap-3 border-t pt-4 text-[11px]">
+              <div><dt class="text-foreground/38">{copy.fee}</dt><dd class="mt-1 font-medium">{card.fee}</dd></div>
+              <div><dt class="text-foreground/38">{copy.kyc}</dt><dd class="mt-1 font-medium">{card.kyc}</dd></div>
+              <div><dt class="text-foreground/38">{copy.applePay}</dt><dd class="mt-1 font-medium">{card.pay}</dd></div>
+            </dl>
+            <p class="text-foreground/30 mt-auto pt-4 text-[10px]">{copy.checked}：{card.checked}</p>
           </article>
         ))}
       </div>
     </section>
 
-    <section class="app-layout border-border border-b py-11 sm:py-16">
-      <p class="section-kicker">Compare</p>
-      <div class="mb-6 flex items-end justify-between gap-4">
-        <h2 class="section-title">{copy.quickCompare}</h2>
+    <section class="home-shell border-border border-b py-11 sm:py-16">
+      <div class="mb-7 flex items-end justify-between gap-5">
+        <div>
+          <h2 class="section-title">{copy.quickCompare}</h2>
+          <p class="section-desc">{copy.quickCompareSub}</p>
+        </div>
         <a href={localizedPath("/compare", locale)} class="text-accent shrink-0 text-[12px] font-medium">{copy.compare}</a>
       </div>
 
-      <div class="compare-shell border-border overflow-x-auto border">
-        <table class="min-w-[620px] w-full border-collapse text-left text-[12px]">
+      <div class="border-border overflow-x-auto border">
+        <table class="min-w-[720px] w-full border-collapse text-left text-[12px]">
           <thead class="bg-muted/55">
             <tr class="border-border border-b">
-              <th class="px-4 py-3 font-medium"></th>
-              {topPicks.map(card => <th class="px-4 py-3 text-[13px] font-semibold">{card.name}</th>)}
+              <th class="px-5 py-4 font-medium"></th>
+              {topPicks.map(card => <th class="px-5 py-4 text-[13px] font-semibold">{card.name}</th>)}
             </tr>
           </thead>
           <tbody>
             <tr class="border-border border-b">
-              <td class="text-foreground/45 px-4 py-3">{copy.fee}</td>
-              {topPicks.map(card => <td class="px-4 py-3">{card.fee}</td>)}
+              <td class="text-foreground/45 px-5 py-4">{copy.fee}</td>
+              {topPicks.map(card => <td class="px-5 py-4">{card.fee}</td>)}
             </tr>
             <tr class="border-border border-b">
-              <td class="text-foreground/45 px-4 py-3">{copy.kyc}</td>
-              {topPicks.map(card => <td class="px-4 py-3">{card.kyc}</td>)}
+              <td class="text-foreground/45 px-5 py-4">{copy.kyc}</td>
+              {topPicks.map(card => <td class="px-5 py-4">{card.kyc}</td>)}
             </tr>
             <tr class="border-border border-b">
-              <td class="text-foreground/45 px-4 py-3">{copy.applePay}</td>
-              {topPicks.map(card => <td class="px-4 py-3">{card.pay}</td>)}
+              <td class="text-foreground/45 px-5 py-4">{copy.applePay}</td>
+              {topPicks.map(card => <td class="px-5 py-4">{card.pay}</td>)}
             </tr>
             <tr>
-              <td class="text-foreground/45 px-4 py-3">{copy.score}</td>
-              {topPicks.map(card => <td class="px-4 py-3 font-semibold">{card.score}</td>)}
+              <td class="text-foreground/45 px-5 py-4">{copy.score}</td>
+              {topPicks.map(card => <td class="px-5 py-4 font-semibold">{card.score}</td>)}
             </tr>
           </tbody>
         </table>
       </div>
     </section>
 
-    <section class="app-layout border-border grid gap-10 border-b py-11 sm:grid-cols-2 sm:gap-12 sm:py-16">
+    <section class="home-shell border-border grid gap-12 border-b py-11 sm:py-16 lg:grid-cols-2 lg:gap-16">
       <div>
-        <p class="section-kicker">Browse by Need</p>
         <h2 class="section-title">{copy.browseNeed}</h2>
         <div class="border-border mt-5 border-t">
           {needs.map(item => (
             <a href={localizedPath("/cards", locale) + "?need=" + encodeURIComponent(item)}
-              class="border-border hover:text-accent flex items-center justify-between border-b py-3.5 text-[14px]">
+              class="border-border hover:text-accent flex items-center justify-between border-b py-4 text-[14px]">
               <span>{item}</span><span class="text-foreground/30">→</span>
             </a>
           ))}
         </div>
       </div>
       <div>
-        <p class="section-kicker">Browse by Region</p>
         <h2 class="section-title">{copy.browseRegion}</h2>
         <div class="border-border mt-5 border-t">
           {regions.map(item => (
             <a href={localizedPath("/cards", locale) + "?region=" + encodeURIComponent(item)}
-              class="border-border hover:text-accent flex items-center justify-between border-b py-3.5 text-[14px]">
+              class="border-border hover:text-accent flex items-center justify-between border-b py-4 text-[14px]">
               <span>{item}</span><span class="text-foreground/30">→</span>
             </a>
           ))}
@@ -268,57 +317,54 @@ const ecosystem = [
       </div>
     </section>
 
-    <section class="app-layout border-border border-b py-11 sm:py-16">
-      <div class="mb-6">
-        <p class="section-kicker">Change Log</p>
-        <div class="flex items-end justify-between gap-4">
-          <div>
-            <h2 class="section-title">{copy.changes}</h2>
-            <p class="section-desc">{copy.changesSub}</p>
-          </div>
-          <a href={localizedPath("/posts", locale)} class="text-accent shrink-0 text-[12px] font-medium">{copy.viewAll}</a>
+    <section class="home-shell border-border border-b py-11 sm:py-16">
+      <div class="mb-7 flex items-end justify-between gap-5">
+        <div>
+          <h2 class="section-title">{copy.changes}</h2>
+          <p class="section-desc">{copy.changesSub}</p>
         </div>
-      </div>
-
-      <div class="divide-border divide-y border-border border-t">
-        {changes.map(item => (
-          <article class="grid grid-cols-[74px_1fr] gap-3 py-5">
-            <div>
-              <p class="text-foreground/36 text-[10px]">{item.date}</p>
-              <p class="text-accent mt-1 text-[10px]">{item.type}</p>
-            </div>
-            <div>
-              <h3 class="text-[14px] font-semibold">{item.name}</h3>
-              <p class="text-foreground/55 mt-1 text-[13px] leading-6">{item.change}</p>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-
-    <section class="app-layout border-border border-b py-11 sm:py-16">
-      <p class="section-kicker">Editorial</p>
-      <div class="mb-6 flex items-end justify-between gap-4">
-        <h2 class="section-title">{copy.guides}</h2>
         <a href={localizedPath("/posts", locale)} class="text-accent shrink-0 text-[12px] font-medium">{copy.viewAll}</a>
       </div>
 
-      <div class="grid gap-7 sm:grid-cols-2">
-        {guides.map((item, index) => (
-          <article class:list={["border-border", index === 0 ? "sm:border-r sm:pr-7" : ""]}>
-            <p class="text-foreground/38 mb-2 text-[10px]">{item.meta}</p>
-            <h3 class="editorial-serif text-[1.35rem] leading-[1.38] font-medium tracking-[-0.02em]">{item.title}</h3>
+      <div class="grid gap-0 lg:grid-cols-3">
+        {changes.map((item, index) => (
+          <article class:list={[
+            "border-border py-5 lg:px-6 lg:py-1",
+            index < changes.length - 1 && "border-b lg:border-b-0 lg:border-r",
+            index === 0 && "lg:pl-0",
+            index === changes.length - 1 && "lg:pr-0",
+          ]}>
+            <div class="flex items-center gap-3">
+              <span class="text-foreground/36 text-[10px]">{item.date}</span>
+              <span class="text-accent text-[10px] font-medium">{item.type}</span>
+            </div>
+            <h3 class="mt-3 text-[15px] font-semibold">{item.name}</h3>
+            <p class="text-foreground/55 mt-1 text-[13px] leading-6">{item.change}</p>
           </article>
         ))}
       </div>
     </section>
 
-    <section class="app-layout py-11 sm:py-16">
-      <p class="section-kicker">Ecosystem</p>
+    <section class="home-shell border-border border-b py-11 sm:py-16">
+      <div class="mb-7 flex items-end justify-between gap-5">
+        <h2 class="section-title">{copy.guides}</h2>
+        <a href={localizedPath("/posts", locale)} class="text-accent shrink-0 text-[12px] font-medium">{copy.viewAll}</a>
+      </div>
+      <div class="grid gap-8 lg:grid-cols-[1.25fr_.75fr] lg:gap-16">
+        {guides.map((item, index) => (
+          <article class:list={[index === 1 && "border-border lg:border-l lg:pl-8"]}>
+            <p class="text-foreground/38 mb-2 text-[10px]">{item.meta}</p>
+            <h3 class="text-[1.45rem] leading-[1.35] font-semibold tracking-[-0.025em] sm:text-[1.7rem]">{item.title}</h3>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="home-shell py-11 sm:py-16">
       <h2 class="section-title">{copy.ecosystem}</h2>
       <div class="border-border mt-5 border-t">
         {ecosystem.map(item => (
-          <article class="border-border grid grid-cols-[80px_1fr_auto] items-center gap-3 border-b py-4">
+          <article class="border-border grid grid-cols-[84px_1fr_auto] items-center gap-4 border-b py-4">
             <span class="text-foreground/38 text-[11px]">{item.type}</span>
             <h3 class="text-[14px] font-semibold">{item.name}</h3>
             <span class="text-foreground/25 text-[12px]">→</span>
@@ -332,27 +378,34 @@ const ecosystem = [
 </Layout>
 
 <style>
-  .home-title { overflow-wrap: anywhere; }
+  .home-shell {
+    width: calc(100% - 2rem);
+    max-width: 72rem;
+    margin-inline: auto;
+  }
+  .home-title {
+    overflow-wrap: anywhere;
+    font-family: var(--font-editorial-sans);
+  }
   .section-kicker {
-    margin-bottom: 0.35rem;
-    color: color-mix(in srgb, var(--foreground) 38%, transparent);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
+    margin-bottom: 0.65rem;
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
   }
   .section-title {
-    font-family: var(--font-editorial-serif);
-    font-size: 1.65rem;
+    font-family: var(--font-editorial-sans);
+    font-size: 1.7rem;
     line-height: 1.2;
-    font-weight: 500;
-    letter-spacing: -0.02em;
+    font-weight: 650;
+    letter-spacing: -0.025em;
   }
   .section-desc {
-    margin-top: 0.45rem;
-    max-width: 36rem;
+    margin-top: 0.5rem;
+    max-width: 40rem;
     color: color-mix(in srgb, var(--foreground) 52%, transparent);
     font-size: 13px;
     line-height: 1.7;
   }
-  .compare-shell { scrollbar-width: thin; }
 </style>
